@@ -48,6 +48,30 @@ scripts/drive_manager.rb --help
 scripts/sheets_manager.rb --help
 ```
 
+## Quickstart (Release Archive)
+
+Release archives include prebuilt binaries and runnable wrappers, so you do not need Rust/Cargo installed.
+
+1. Download the archive matching your platform from GitHub Releases.
+2. Extract it (it contains a single directory named `google-docs-rust-<version>-<target>/`).
+3. Run the wrappers from inside that directory.
+
+macOS/Linux example:
+
+```bash
+tar -xzf google-docs-rust-vX.Y.Z-aarch64-apple-darwin.tar.gz
+cd google-docs-rust-vX.Y.Z-aarch64-apple-darwin
+scripts/drive_manager --help
+```
+
+Windows example (PowerShell):
+
+```powershell
+Expand-Archive .\\google-docs-rust-vX.Y.Z-x86_64-pc-windows-msvc.zip -DestinationPath .
+cd .\\google-docs-rust-vX.Y.Z-x86_64-pc-windows-msvc
+.\\scripts\\drive_manager.cmd --help
+```
+
 ## Install as a skill
 
 Install directly from GitHub with the community `skills` CLI:
@@ -64,13 +88,19 @@ npx skills add https://github.com/jimmystridh/google-docs-rust --skill google-do
 
 ## Auth setup
 
-1. Create Google Cloud OAuth Desktop credentials (OAuth Client ID: **Desktop app**).
+The tools look for OAuth credentials under your home directory:
+
+- macOS/Linux: `~/.claude/.google/client_secret.json`
+- Windows: `%USERPROFILE%\\.claude\\.google\\client_secret.json`
+
+1. Create Google Cloud OAuth credentials (OAuth Client ID: **Desktop app**).
 2. Enable the APIs in your Google Cloud project:
    - Google Drive API
    - Google Docs API
    - Google Sheets API
 3. Save the downloaded OAuth client JSON to:
    - `~/.claude/.google/client_secret.json`
+   - (Create the folder first if needed: `mkdir -p ~/.claude/.google`)
 4. Trigger the auth flow once to get an authorization URL:
 
 ```bash
@@ -88,6 +118,8 @@ scripts/sheets_manager auth <code>
 ```
 
 Tokens are stored at `~/.claude/.google/token.json`. Drive commands use the same shared token and do not have a separate `auth` command.
+
+Note: For convenience across related Google skills, the authorization URL requests scopes for Drive/Docs/Sheets plus Calendar, Contacts (People API), and Gmail modify.
 
 ## Validation
 

@@ -375,6 +375,7 @@ pub fn auth_required_payload(auth_url: &str, message: &str, script_hint: &str) -
         "2. Grant access in your browser",
         "3. Copy the authorization code",
         format!("4. Run: {script_hint} auth <code>"),
+        format!("   If you are using wrappers: scripts/{script_hint} auth <code>"),
         "5. Retry the original command"
       ]
     })

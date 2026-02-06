@@ -23,7 +23,7 @@ All three Google skills use standardized exit codes:
 {
   "status": "error",
   "message": "client_secret.json not found",
-  "error_code": "AUTH_ERROR"
+  "error_code": "AUTH_FAILED"
 }
 ```
 
@@ -49,7 +49,7 @@ All three Google skills use standardized exit codes:
 {
   "status": "error",
   "message": "Invalid OAuth credentials",
-  "error_code": "AUTH_ERROR"
+  "error_code": "AUTH_FAILED"
 }
 ```
 
@@ -80,7 +80,9 @@ All three Google skills use standardized exit codes:
 {
   "status": "error",
   "message": "Token refresh failed",
-  "error_code": "AUTH_ERROR"
+  "error_code": "AUTH_REQUIRED",
+  "auth_url": "https://accounts.google.com/o/oauth2/auth?...",
+  "instructions": ["..."]
 }
 ```
 
@@ -106,7 +108,7 @@ All three Google skills use standardized exit codes:
 {
   "status": "error",
   "message": "Token missing required scope",
-  "error_code": "AUTH_ERROR"
+  "error_code": "API_ERROR"
 }
 ```
 

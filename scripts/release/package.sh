@@ -68,7 +68,15 @@ if [[ "${TARGET}" == *"windows"* ]]; then
   for bin in "${required_bins[@]}"; do
     cat > "${PKG_DIR}/scripts/${bin}.cmd" <<EOF
 @echo off
-set SCRIPT_DIR=%~dp0
+setlocal
+set "SCRIPT_DIR=%~dp0"
+if "%HOME%"=="" (
+  if not "%USERPROFILE%"=="" (
+    set "HOME=%USERPROFILE%"
+  ) else (
+    set "HOME=%HOMEDRIVE%%HOMEPATH%"
+  )
+)
 "%SCRIPT_DIR%..\\bin\\${bin}${BIN_EXT}" %*
 EOF
   done

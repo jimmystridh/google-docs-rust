@@ -1,5 +1,6 @@
 use serde_json::{Value, json};
 use std::io::{self, Read};
+use std::path::PathBuf;
 
 pub fn print_json(value: &Value) {
     let rendered = serde_json::to_string_pretty(value).unwrap_or_else(|_| "{}".to_string());
@@ -24,8 +25,26 @@ pub fn read_stdin_json() -> anyhow::Result<Value> {
     Ok(parsed)
 }
 
-pub fn home_dir() -> anyhow::Result<std::path::PathBuf> {
-    std::env::var_os("HOME")
-        .map(std::path::PathBuf::from)
-        .ok_or_else(|| anyhow::anyhow!("Unable to determine HOME directory"))
+pub fn home_dir() -> anyhow::Result<PathBuf> {
+    if let Some(home) = std::env::var_os("HOME") {
+        return Ok(PathBuf::from(home));
+    }
+
+    // Windows shells often don't set HOME; prefer the standard env vars.
+    #[cfg(windows)]
+    {
+        if let Some(userprofile) = std::env::var_os("USERPROFILE") {
+            return Ok(PathBuf::from(userprofile));
+        }
+
+        let drive = std::env::var_os("HOMEDRIVE");
+        let path = std::env::var_os("HOMEPATH");
+        if let (Some(drive), Some(path)) = (drive, path) {
+            let mut home = PathBuf::from(drive);
+            home.push(path);
+            return Ok(home);
+        }
+    }
+
+    Err(anyhow::anyhow!("Unable to determine HOME directory"))
 }
