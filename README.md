@@ -158,4 +158,4 @@ The release workflow uploads archives that can be used directly by agents withou
 
 ## License
 
-MIT (same as original)
+MIT

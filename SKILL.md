@@ -1,6 +1,6 @@
 ---
 name: google-docs-skill
-description: Rust implementation of Google Docs, Google Sheets, and Google Drive management with full document operations, spreadsheet editing, and file workflows. Includes Markdown support for headings, bold, italic, lists, tables, and checkboxes plus Drive upload/download/share/search and advanced Sheets operations.
+description: Manage Google Docs, Google Sheets, and Google Drive with full document operations, spreadsheet editing, and file workflows. Includes Markdown support for headings, bold, italic, lists, tables, and checkboxes plus Drive upload/download/share/search and advanced Sheets operations.
 category: productivity
 version: 2.0.0
 key_capabilities: create-from-markdown, insert-from-markdown, tables, formatted text, Drive upload/download/share/search, sheets
@@ -483,7 +483,7 @@ scripts/drive_manager share --file-id abc123 --email user@example.com --role wri
 # Make publicly accessible (anyone with link)
 scripts/drive_manager share --file-id abc123 --type anyone --role reader
 
-# Domain-wide sharing is not exposed as a dedicated CLI flag in this port
+# Domain-wide sharing is not exposed as a dedicated CLI flag in this CLI
 ```
 
 ### Folder Management
@@ -1243,7 +1243,7 @@ echo '{"spreadsheet_id":"abc123"}' | scripts/sheets_manager get-metadata
 
 ## Version History
 
-- **2.0.0** (2026-02-06) - Full Rust port. Replaced Ruby runtime with Rust binaries and Cargo wrappers while preserving CLI behavior and JSON response contracts across Docs, Drive, and Sheets managers.
+- **2.0.0** (2026-02-06) - Compiled binaries + wrapper scripts while preserving CLI behavior and JSON response contracts across Docs, Drive, and Sheets managers.
 - **1.3.0** (2026-02-06) - Added full Google Sheets support via sheets_manager: create, read, write, append, clear, batch operations, format cells (bold, colors, fonts, alignment, borders, number formats), merge/unmerge, freeze, sort, find-replace, charts, filters, conditional formatting, protected ranges, sheet/tab management (add, delete, rename, copy), column/row sizing.
 - **1.2.0** (2025-12-25) - Added markdown support documentation: `create-from-markdown`, `insert-from-markdown`, `insert-table` commands. Supports headings, bold, italic, code, lists, checkboxes, tables, and horizontal rules.
 - **1.1.0** (2025-12-20) - Added Google Drive operations via drive_manager: upload, download, search, list, share, move, copy, delete, folder management. Integrated with excalidraw-diagrams skill for diagram workflows.
