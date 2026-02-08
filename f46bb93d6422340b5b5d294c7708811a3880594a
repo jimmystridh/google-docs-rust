@@ -1,0 +1,25 @@
+CLAUDE.md
+  d8701cc002a37814 1-56
+README.md
+  d8701cc002a37814 1-27,29,32,35,38,41,43,45-50,53,56,58,61,64,66,69-71,74,76,79,82,84,87-89,92,94-95,98-100,103,105,108,111,113,115
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.42",
+  "base_commit_sha": "f46bb93d6422340b5b5d294c7708811a3880594a",
+  "prompts": {
+    "d8701cc002a37814": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "648cdd2b-a5e8-49ee-a8f5-de3814a720c3",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Jimmy Stridh <jimmystridh@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 125,
+      "total_deletions": 125,
+      "accepted_lines": 125,
+      "overriden_lines": 0
+    }
+  }
+}
