@@ -51,18 +51,9 @@ SCRIPT_DIR="\$(CDPATH= cd -- "\$(dirname -- "\$0")" && pwd)"
 exec "\${SCRIPT_DIR}/../bin/${bin}${BIN_EXT}" "\$@"
 EOF
 
-  cat > "${PKG_DIR}/scripts/${bin}.rb" <<EOF
-#!/usr/bin/env ruby
-# frozen_string_literal: true
-
-script_dir = File.expand_path(__dir__)
-exec(File.join(script_dir, '..', 'bin', '${bin}${BIN_EXT}'), *ARGV)
-EOF
-
 done
 
 chmod +x "${PKG_DIR}/scripts/docs_manager" "${PKG_DIR}/scripts/drive_manager" "${PKG_DIR}/scripts/sheets_manager"
-chmod +x "${PKG_DIR}/scripts/docs_manager.rb" "${PKG_DIR}/scripts/drive_manager.rb" "${PKG_DIR}/scripts/sheets_manager.rb"
 
 if [[ "${TARGET}" == *"windows"* ]]; then
   for bin in "${required_bins[@]}"; do
